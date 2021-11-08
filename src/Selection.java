@@ -50,15 +50,21 @@ public class Selection <E extends Comparable<E>> {
     }
 
     public E sixB () {
-        /** Couldn't figure it out **/
+        /** Tried to implement with priority queue and couldn't figure it out, didn't leave myself enough time and I accept hw point loss **/
         return null;
     }
 
     public static void main(String[] args) {
-        ArrayList<Integer> list = randomList(10000);
-        Selection s = new Selection(list, 100);
-        //System.out.println(s.oneB());
-        System.out.println(s.sixA());
+        ArrayList<Integer> list = randomList(1000000);
+        Selection s = new Selection(list, 100000);
+        double startTime1B = System.currentTimeMillis() / 1000;
+        int oneB = (int) s.oneB();
+        double time1B = (System.currentTimeMillis() / 1000) - startTime1B;
+        double startTime6A = System.currentTimeMillis() / 1000;
+        int sixA = (int) s.sixA();
+        double time6A = (System.currentTimeMillis() / 1000) - startTime6A;
+        System.out.println("1B: " + oneB + ", TIME: " + time1B);
+        System.out.println("6A: " + sixA + ", TIME: " + time6A);
     }
 
 }

@@ -8,9 +8,67 @@ public class MaxHeap<E extends Comparable<E>> extends ArrayList<E>   {
         super();
 
     }
+
+    public MaxHeap(Collection<? extends E> c){
+
+        super(c);
+
+    }
     // returns max value
     public E findMax() {
         return  get(0);
+    }
+
+    public void buildHeap() {
+
+        for (int i=size()/2;i>=0;i--)
+            percolateDown(i);
+
+
+    }
+
+    //same as remove and add done back to back
+    public void replaceMax (E val) {
+        set(0,val);
+        percolateDown(0);
+    }
+    public void percolateDown(int location) {
+        E left=null;
+        E right=null;
+
+        if (!isEmpty()) {
+
+            int k = size()-1;
+            int c1=2*location+1;
+
+            while (c1<=k) {
+                left=get(c1);
+                int c2 =2*location+2;
+                if (c2<=k)  { //1
+                    right=get(c2);
+                    if (left.compareTo(right)>=0) {
+                        if (left.compareTo(get(location))>0)
+                            swap(location,c1);
+                        location=c1;
+                    }
+                    else if (right.compareTo(get(location))>0) {
+                        swap(location,c2);
+                        location=c2;
+                    }
+                } //1
+                // no right child
+                else {
+                    if (left.compareTo(get(location))>0)
+                        swap(location,c1);
+                    break;
+                }
+                //  c1=2*location+1;
+                if (c1!=2*location+1) c1=2*location+1;
+                else break;
+            }
+        }
+
+
     }
 
     // adds a new value to the heap at the end of the Heap and
@@ -77,7 +135,9 @@ public class MaxHeap<E extends Comparable<E>> extends ArrayList<E>   {
                         swap(p,c1);
                     break;
                 }
-                c1=2*p+1;
+                // c1=2*p+1;
+                if (c1!=2*p+1) c1=2*p+1;
+                else break;
             }
             return max;
         }
